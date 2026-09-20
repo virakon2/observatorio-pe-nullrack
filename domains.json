@@ -1,0 +1,12 @@
+[
+  { "host": "www.gob.pe", "label": "Portal del Estado Peruano" },
+  { "host": "www.sunat.gob.pe", "label": "SUNAT" },
+  { "host": "www.inei.gob.pe", "label": "INEI" },
+  { "host": "www.congreso.gob.pe", "label": "Congreso" },
+  { "host": "www.bcrp.gob.pe", "label": "Banco Central de Reserva" },
+  { "host": "www.pucp.edu.pe", "label": "PUCP" },
+  { "host": "www.unmsm.edu.pe", "label": "UNMSM" },
+  { "host": "www.minedu.gob.pe", "label": "Ministerio de Educación" },
+  { "host": "www.minsa.gob.pe", "label": "Ministerio de Salud" },
+  { "host": "www.osiptel.gob.pe", "label": "OSIPTEL" }
+]

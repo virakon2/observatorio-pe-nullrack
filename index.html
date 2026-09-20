@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07110e">
+  <meta name="description" content="Observatorio verificable de HTTPS, redirección, HSTS, TLS y certificados para dominios peruanos.">
+  <title>Observatorio .PE · Evidencia HTTPS</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <nav class="nav wrap" aria-label="Principal">
+      <a class="brand" href="/" aria-label="Observatorio punto pe, inicio"><span class="brand-mark">PE</span><span>OBSERVATORIO <strong>.PE</strong></span></a>
+      <div class="nav-actions"><span class="method-chip">HEAD / · NO INVASIVO</span><a class="nav-link" href="#metodo">Método</a></div>
+    </nav>
+    <div class="hero wrap">
+      <div class="eyebrow"><span class="live-dot"></span> EVIDENCIA ABIERTA · TRANSPORTE WEB PERUANO</div>
+      <h1>HTTPS no basta.<br><em>Hay que demostrarlo.</em></h1>
+      <p>Una medición puntual y explicable de la portada de sitios peruanos: redirección desde HTTP, respuesta TLS, HSTS y vigencia del certificado. Sin rastreo, formularios ni pruebas invasivas.</p>
+      <div class="hero-actions"><button id="scan-all" class="primary">Medir catálogo <span>↗</span></button><a href="#observatorio" class="secondary">Ver el tablero <span>↓</span></a></div>
+      <div class="hero-meta"><span><strong id="catalog-size">—</strong> dominios .pe</span><span><strong>2</strong> solicitudes por dominio</span><span><strong>4</strong> señales verificables</span><span><strong>0</strong> datos personales</span></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="dashboard wrap" id="observatorio" aria-labelledby="results-title">
+      <div class="section-head"><div><div class="kicker">01 / OBSERVATORIO</div><h2 id="results-title">Del dato a la prioridad.</h2><p>La nota resume el transporte observado; la evidencia conserva los matices.</p></div><div id="last-check" class="timestamp">Aún sin medir</div></div>
+      <div class="stats" aria-live="polite">
+        <div class="stat"><span class="stat-label">MEDIDOS</span><strong id="count-checked">0<span class="denom"> / 10</span></strong></div>
+        <div class="stat stat-good"><span class="stat-label">NOTA A</span><strong id="count-a">0</strong><small>HTTPS + redirección + HSTS</small></div>
+        <div class="stat stat-warn"><span class="stat-label">HTTP ABIERTO</span><strong id="count-http">0</strong><small>HTTPS existe, pero no se fuerza</small></div>
+        <div class="stat stat-bad"><span class="stat-label">CRÍTICOS / DUDOSOS</span><strong id="count-critical">0</strong><small>HTTPS falló o no hubo evidencia</small></div>
+      </div>
+
+      <div class="toolbar">
+        <div id="filters" class="filters" aria-label="Filtrar resultados"><button class="active" data-filter="all">Todos</button><button data-filter="attention">Requieren atención</button><button data-filter="protected">Nota A</button></div>
+        <div class="toolbar-actions"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Buscar sitio o dominio" aria-label="Buscar sitio o dominio"></label><button id="export-report" class="export" disabled>Exportar evidencia ↓</button></div>
+      </div>
+
+      <div class="table-wrap"><table><thead><tr><th>Sitio</th><th>Nota</th><th>Evidencia observada</th><th>Acción</th></tr></thead><tbody id="sites"><tr><td colspan="4" class="loading">Cargando catálogo…</td></tr></tbody></table></div>
+      <p class="table-note"><strong>Lectura responsable:</strong> una falla puntual no demuestra que todo un dominio sea inseguro. La nota solo resume la portada, desde este observatorio y en el momento indicado.</p>
+    </section>
+
+    <section class="scale" aria-labelledby="scale-title"><div class="wrap"><div class="kicker light">02 / ESCALA</div><h2 id="scale-title">Una letra. Toda la evidencia.</h2><div class="grade-grid">
+      <article><span class="grade grade-a">A</span><div><h3>Transporte reforzado</h3><p>HTTPS responde, HTTP redirige y HSTS está activo.</p></div></article>
+      <article><span class="grade grade-b">B</span><div><h3>HTTPS disponible</h3><p>Funciona, pero falta HSTS o la redirección no pudo verificarse.</p></div></article>
+      <article><span class="grade grade-c">C</span><div><h3>HTTP sigue abierto</h3><p>HTTPS existe, pero la portada HTTP no obliga a usarlo.</p></div></article>
+      <article><span class="grade grade-f">F</span><div><h3>HTTPS no verificado</h3><p>HTTP respondió y la conexión TLS falló en esta medición.</p></div></article>
+    </div></div></section>
+
+    <section class="method" id="metodo" aria-labelledby="method-title"><div class="wrap method-grid"><div><div class="kicker">03 / MÉTODO</div><h2 id="method-title">Medir sin invadir.</h2><p>El observatorio fija una dirección IP pública y realiza dos solicitudes <code>HEAD /</code>. No sigue enlaces, no inicia sesión, no descarga páginas y no busca vulnerabilidades.</p></div><div class="steps">
+      <article><span class="step-no">01</span><div><h3>HTTP y redirección</h3><p>Observamos si la portada en el puerto 80 dirige explícitamente a una URL HTTPS.</p></div></article>
+      <article><span class="step-no">02</span><div><h3>TLS y certificado</h3><p>Registramos respuesta, protocolo negociado y días restantes del certificado.</p></div></article>
+      <article><span class="step-no">03</span><div><h3>HSTS</h3><p>Buscamos la política que ordena al navegador recordar el uso exclusivo de HTTPS.</p></div></article>
+      <article><span class="step-no">04</span><div><h3>Evidencia exportable</h3><p>El informe JSON preserva hora, señales y alcance para repetir o contrastar la medición.</p></div></article>
+    </div></div></section>
+
+    <section class="limitations wrap"><div class="kicker">04 / LÍMITES</div><h2>Precisión antes que espectáculo.</h2><div class="cards"><article><span class="card-icon">/</span><h3>Solo la portada</h3><p>Se observa <code>/</code>. Rutas, subdominios y servicios pueden comportarse de otra manera.</p></article><article><span class="card-icon">◷</span><h3>Una fotografía temporal</h3><p>Redes, firewalls y certificados cambian. Cada resultado incluye su instante de captura.</p></article><article><span class="card-icon">≠</span><h3>No es una auditoría</h3><p>HTTPS protege el tránsito. No evaluamos la seguridad de la aplicación ni explotamos fallos.</p></article></div></section>
+  </main>
+  <footer><div class="wrap footer-inner"><span>OBSERVATORIO .PE <span class="footer-dot">·</span> NULLRACK ARENA</span><span>Medir · Explicar · Priorizar</span></div></footer>
+</body>
+</html>
